@@ -1,0 +1,53 @@
+[project]
+name = "deeplearning"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [ 
+    "jupyterlab>=4.4.3", 
+    "numpy>=2.3.1", 
+    "pandas>=2.3.0", 
+    "torch==2.4.1", 
+    "torchvision==0.19.1", 
+    "torchaudio==2.4.1", 
+] 
+
+
+[project.optional-dependencies] 
+cpu = ["torch==2.4.1", "torchvision==0.19.1", "torchaudio==2.4.1"] 
+cu124 = ["torch==2.4.1", "torchvision==0.19.1", "torchaudio==2.4.1"] 
+
+[tool.uv] 
+# The cpu and cu124 extras are mutually exclusive, you can't use both at the same time 
+conflicts = [[{ extra = "cpu" }, { extra = "cu124" }]] 
+ 
+ 
+# The package is only installed on Linux systems 
+# environments = ["sys_platform == 'linux' and os_name == 'posix'"] 
+ 
+[tool.uv.sources] 
+# The torch, torchvision, and torchaudio packages are installed from the pytorch-cpu and pytorch-cu124 indexes 
+torch = [ 
+  { index = "pytorch-cpu", extra = "cpu" }, 
+  { index = "pytorch-cu124", extra = "cu124" }, 
+] 
+torchvision = [ 
+  { index = "pytorch-cpu", extra = "cpu" }, 
+  { index = "pytorch-cu124", extra = "cu124" }, 
+] 
+torchaudio = [ 
+  { index = "pytorch-cpu", extra = "cpu" }, 
+  { index = "pytorch-cu124", extra = "cu124" }, 
+] 
+ 
+[[tool.uv.index]] 
+# The pytorch-cpu index is used to install the torch, torchvision, and torchaudio packages 
+name = "pytorch-cpu" 
+url = "https://download.pytorch.org/whl/cpu" 
+explicit = true 
+ 
+[[tool.uv.index]] 
+name = "pytorch-cu124" 
+url = "https://download.pytorch.org/whl/cu124" 
+explicit = true
